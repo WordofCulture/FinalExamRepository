@@ -1,1 +1,15 @@
 # FinalExamRepository
+
+
+First Shader Implemented: Character & Object Shadows
+This implementation was added to change the static shadows used in Street Fighters 2. The normal shadows in Street Fighters 2 appear to be images that do not accurately represent the character/object they shadow.
+The intention for this shadow shader, is to properly follow the player/object and its movememnt, while adapting to the form it takes as the light hits it from different positions and angles along the x-axis. The way it works is that it has a texture to use as the shadow that is mapped by UVs, which are also passed to the fragment shader for colouring. Meanwhile, the actual shadow coordinates are calculated using the TransformToWorldCoord function using the surfaces vertex positions, and the positions of objects in World Space, where the shadows can now be casted in the pass by Clipping the object onto the surface.
+
+Second Shader Implemented: Decal
+This implementation was added with the intention of giving more of a dynamic to character death by having a texture for the normal state, and a more bloody one for the defeated state. When a character is normally K.O.'d in street fighters 2, they are downed and are laying on the floor, however, the actual state of their texture is still the same as it would be when they were still up.
+The hope for this shader was to have a decal with a toggle on K.O. that would be handled by a script to tell when the player or enemy was defeated, and switch from the upstate, to the downstate with the additional effect of the texture. The way the shader works is that it has a Main Texture input, a Decal Texture input for the Downstate, & a toggle for the two. Then, gets the objects position in object space, and clips the texture using it's UV coordinates that were sent to the fragment shader, in clip space.
+There is not currently a script implemented to manage the "OnDeath" functionality that the shader is supposed to have, as I am not a programmer and have little to no expertise in that field, so it is only the shader that is there.
+
+Third Shader Implemented: Ambient Lighting
+This shader was implemented because the lighting of the characters in street fighters 2 was the same no matter where they went. There were multiple areas where the player and enemies where fighting, which realistically would have different lighting settings, and would affect the characters as such.
+This shader was implemented to give a more realistic view of where the characters actually are in regards to their location, this would give the game more depth in regards to the scenic atmosphere of the game. This shader was made using shasder graph and works like so. It takes the dot product of the normalized main light direction and the normal vector and is then multiplied by negative 1 to have the lighting face the light. Then it is saturated and added with another branch that handles the actual texture. This branch has a SampleTexture 2D with a texture input, which is multiplied by a colour, and then multiplied by the ambient node to get the lighting in respects to the  other directions of the object in its vicinity.
