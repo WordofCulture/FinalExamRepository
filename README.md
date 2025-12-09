@@ -1,4 +1,5 @@
 # FinalExamRepository
+This repository is to exemplify some changes I would make to the game "Street Fighters 2" in terms of graphics
 
 
 First Shader Implemented: Character & Object Shadows
@@ -13,3 +14,5 @@ There is not currently a script implemented to manage the "OnDeath" functionalit
 Third Shader Implemented: Ambient Lighting
 This shader was implemented because the lighting of the characters in street fighters 2 was the same no matter where they went. There were multiple areas where the player and enemies where fighting, which realistically would have different lighting settings, and would affect the characters as such.
 This shader was implemented to give a more realistic view of where the characters actually are in regards to their location, this would give the game more depth in regards to the scenic atmosphere of the game. This shader was made using shasder graph and works like so. It takes the dot product of the normalized main light direction and the normal vector and is then multiplied by negative 1 to have the lighting face the light. Then it is saturated and added with another branch that handles the actual texture. This branch has a SampleTexture 2D with a texture input, which is multiplied by a colour, and then multiplied by the ambient node to get the lighting in respects to the  other directions of the object in its vicinity.
+
+There was meant to be a fourth shader but I was not able to get to it because I was trying to figure out how I would change some of the shaders and try to implement the script "OnDeath" Decal but failed to do so within a reasonable time, and then started focusing on documentation.
